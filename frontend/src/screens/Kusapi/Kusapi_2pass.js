@@ -38,7 +38,7 @@ const Kusapi = ({ location, history }) => {
         />
       </div> 
       <div> space one line </div>     
-      <div className="LineApp">
+      <div className="MyApp">
         <Chart
           chartType="LineChart"
           width="100%"
