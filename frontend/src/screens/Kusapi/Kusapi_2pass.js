@@ -20,6 +20,8 @@ const Kusapi = ({ location, history }) => {
     ["2006", 660, 1120],
     ["2007", 1030, 540]
   ];
+  const nulldata = [
+  ];
   const options = {
     title: "Company Performance",
     curveType: "function",
@@ -32,23 +34,33 @@ const Kusapi = ({ location, history }) => {
         <Chart
           chartType="LineChart"
           width="100%"
-          height="100px"
+          height="200px"
           data={data}
           options={options}
         />
       </div> 
-      <div> space one line </div>     
-      <div className="MyApp">
+      <div className="SpaceLine">
         <Chart
           chartType="LineChart"
           width="100%"
           height="100px"
+          data={nulldata}
+          options={options}
+        />
+      </div> 
+      <div className="LineApp">
+        <Chart
+          chartType="LineChart"
+          width="100%"
+          height="200px"
           data={data}
           options={options}
         />
-      </div>      
+      </div> 
     </MainScreen>
   );
 };
 
 export default Kusapi;
+
+

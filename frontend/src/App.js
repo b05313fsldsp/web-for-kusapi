@@ -34,7 +34,7 @@ function App() {
         <Route path="/createnote" component={CreateNote} />
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/charts" component={ChartsScreen} />
-        <Route path="/script" component={MyScript} />
+        <Route path="/myscript" component={MyScript} />
         <Route path="/kusapi" component={Kusapi} />
       </main>
       <Footer />

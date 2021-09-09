@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
-import "./Kusapi.css";
+import "./MyScript.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../../actions/userActions";
 import Loading from "../../components/Loading";
@@ -12,15 +12,13 @@ import { render } from "react-dom";
 import { Chart } from "react-google-charts";
 
 
-const Kusapi = ({ location, history }) => {
+const MyScript = ({ location, history }) => {
   const data = [
     ["Year", "Sales", "Expenses"],
     ["2004", 1000, 400],
     ["2005", 1170, 460],
     ["2006", 660, 1120],
     ["2007", 1030, 540]
-  ];
-  const nulldata = [
   ];
   const options = {
     title: "Company Performance",
@@ -29,38 +27,18 @@ const Kusapi = ({ location, history }) => {
   };
 
   return (
-    <MainScreen title="KUS API">
+    <MainScreen title="My Script">
       <div className="MyApp">
         <Chart
           chartType="LineChart"
           width="100%"
-          height="200px"
+          height="400px"
           data={data}
           options={options}
         />
-      </div> 
-      <div className="SpaceLine">
-        <Chart
-          chartType="LineChart"
-          width="100%"
-          height="100px"
-          data={nulldata}
-          options={options}
-        />
-      </div> 
-      <div className="LineApp">
-        <Chart
-          chartType="LineChart"
-          width="100%"
-          height="200px"
-          data={data}
-          options={options}
-        />
-      </div> 
+      </div>      
     </MainScreen>
   );
 };
 
-export default Kusapi;
-
-
+export default MyScript;
