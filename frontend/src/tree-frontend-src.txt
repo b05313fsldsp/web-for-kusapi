@@ -1,0 +1,63 @@
+.
+├── actions
+│   ├── notesActions.js
+│   └── userActions.js
+├── App.css
+├── App.js
+├── background1.jpg
+├── background1 - old.jpg
+├── background.jpg
+├── background.webp
+├── bootstrap.min.css
+├── components
+│   ├── ErrorMessage.js
+│   ├── Footer.js
+│   ├── Header.js
+│   ├── Loading.js
+│   ├── MainScreen.js
+│   └── Screen.css
+├── constants
+│   ├── notesConstants.js
+│   └── userConstants.js
+├── index.css
+├── index.js
+├── KUS-1 - background1.jpg
+├── reducers
+│   ├── notesReducers.js
+│   └── userReducers.js
+├── reportWebVitals.js
+├── screens
+│   ├── ChartsScreen
+│   │   ├── ChartsScreen.css
+│   │   ├── ChartsScreen.js
+│   │   └── ChartsScreen_old.js
+│   ├── Kusapi
+│   │   ├── Kusapi_2pass.js
+│   │   ├── Kusapi.css
+│   │   ├── Kusapi.js
+│   │   └── Kusapi_old.js
+│   ├── LandingPage
+│   │   ├── LandingPage.js
+│   │   └── LandingStyles.css
+│   ├── LoginScreen
+│   │   ├── LoginScreen.css
+│   │   └── LoginScreen.js
+│   ├── MyNotes
+│   │   └── MyNotes.js
+│   ├── MyScript
+│   │   ├── MyScript.css
+│   │   ├── MyScript.js
+│   │   └── MyScript_old.js
+│   ├── ProfileScreen
+│   │   ├── ProfileScreen.css
+│   │   └── ProfileScreen.js
+│   ├── RegisterScreen
+│   │   ├── RegisterScreen.css
+│   │   └── RegisterScreen.js
+│   └── SingleNote
+│       ├── CreateNote.js
+│       └── SingleNote.js
+├── store.js
+└── tree-frontend-src.txt
+
+14 directories, 46 files
