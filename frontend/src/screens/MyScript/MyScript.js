@@ -7,7 +7,14 @@ import { updateProfile } from "../../actions/userActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
+//a.
+import Chart from "react-google-charts";
+//import axios from "axios";
+
+
 const MyScript = ({ location, history }) => {
+  const [userData, setUserData] = useState({});
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pic, setPic] = useState();
@@ -22,6 +29,19 @@ const MyScript = ({ location, history }) => {
 
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, error, success } = userUpdate;
+
+  //b.
+  const gitHubUrl = "https://api.github.com/users/deekshasharma";
+
+  const getGitHubUserWithFetch = async () => {
+      const response = await fetch(gitHubUrl);
+      const jsonData = await response.json();
+      setUserData(jsonData);
+    };
+
+
+
+
 
   useEffect(() => {
     if (!userInfo) {
