@@ -1,3 +1,4 @@
+/* dc- MyScript-16b-09-2021.js */
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
@@ -13,24 +14,58 @@ import { Chart } from "react-google-charts";
 const kusUrl = "http://10.3.1.194:8081/api/tutorials";
 
 
-const DidMount = async () => {
-      const response = await fetch("https://api.exchangeratesapi.io/latest?symbols=USD,GBP,CAD");
-      const json = await response.json();
-      const rateCurrencyNames = Object.keys(json.rates);
-      const rateCurrencyValues = Object.values(json.rates);
-      const chartData = [["Currency Name", "Currency Rate"]]
-      for (let i = 0; i < rateCurrencyNames.length; i += 1) {
-        chartData.push([rateCurrencyNames[i], rateCurrencyValues[i]])
-      }
-      // component.setState({
-      //  dataLoadingStatus: "ready",
-      //  chartData: chartData
-      // }
-      // )
-}
+const Componentz = () => {
+  
+  // let count = 256;
+  // STEP 2:
+  // 透過 useState 建立 `count` 這個變數，預設值設為 256
+  // 並取得修改變數的 `setCount` 方法
+  const [count, setCount] = useState(256);
+
+  return (
+    <div className="container">
+      // dc-
+      <div className="chevron chevron-up" 
+      onClick={() => {
+          //count = count + 1;
+           // STEP 3: 使用 setCount 方法來改變 count 的值
+          setCount(count + 1);
+          console.log(`current Count is ${count}`);
+        }}
+      />
+      <div className="number">{count}</div>
+      <div className="chevron chevron-down" />
+    </div>
+  );
+};
+
+const Counter = () => {
+  
+  // let count = 256;
+  // STEP 2:
+  // 透過 useState 建立 `count` 這個變數，預設值設為 256
+  // 並取得修改變數的 `setCount` 方法
+  const [count, setCount] = useState(256);
+
+  return (
+    <div className="container">
+      // dc-
+      <div className="chevron chevron-up" 
+      onClick={() => {
+          //count = count + 1;
+           // STEP 3: 使用 setCount 方法來改變 count 的值
+          setCount(count + 1);
+          console.log(`current Count is ${count}`);
+        }}
+      />
+      <div className="number">{count}</div>
+      <div className="chevron chevron-down" />
+    </div>
+  );
+};
 
 
-const MyScript = (didMount) => {
+const MyScript = (Component) => {
 
 const [userData, setUserData] = useState({});
 
@@ -47,6 +82,7 @@ const getKusApiUserWithFetch = async () => {
   return (
     <MainScreen title="MyScript API">
       <div className="MyApp">
+          <Counter />
           <Chart 
             chartType="LineChart"
             // data={component.state.chartData}
