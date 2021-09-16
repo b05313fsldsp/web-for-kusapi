@@ -19,15 +19,15 @@ const Counter = () => (
 );
 
 const DidMount = () => (
-      // const response = await fetch("https://api.exchangeratesapi.io/latest?symbols=USD,GBP,CAD");
-      // const json = await response.json();
-      // const rateCurrencyNames = Object.keys(json.rates);
-      // const rateCurrencyValues = Object.values(json.rates);
-      // const chartData = [["Currency Name", "Currency Rate"]]
-      // for (let i = 0; i < rateCurrencyNames.length; i += 1) {
-      //  chartData.push([rateCurrencyNames[i], rateCurrencyValues[i]])
-      // }
-      DidMount.setState({
+      const response = await fetch("https://api.exchangeratesapi.io/latest?symbols=USD,GBP,CAD");
+      const json = await response.json();
+      const rateCurrencyNames = Object.keys(json.rates);
+      const rateCurrencyValues = Object.values(json.rates);
+      const chartData = [["Currency Name", "Currency Rate"]]
+      for (let i = 0; i < rateCurrencyNames.length; i += 1) {
+        chartData.push([rateCurrencyNames[i], rateCurrencyValues[i]])
+      }
+      component.setState({
         dataLoadingStatus: "ready",
         chartData: chartData
       })
@@ -41,7 +41,7 @@ const MyScript = (didMount) => {
       <div className="MyApp">
           <Chart 
             chartType="BarChart"
-            data={didMount.state.chartData}
+            data={component.state.chartData}
             options={{
               chartArea: {
                 width:"50%"
