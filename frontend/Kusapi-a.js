@@ -23,7 +23,6 @@ const Kusapi = ({ location, history }) => {
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, error, success } = userUpdate;
 
-//a.
   useEffect(() => {
     if (!userInfo) {
       history.push("/");
@@ -33,7 +32,6 @@ const Kusapi = ({ location, history }) => {
       setPic(userInfo.pic);
     }
   }, [history, userInfo]);
-
 
   const postDetails = (pics) => {
     setPicMessage(null);
@@ -59,44 +57,6 @@ const Kusapi = ({ location, history }) => {
     }
   };
 
-
-  function useAsyncHook(searchBook) {
-  const [result, setResult] = React.useState([]);
-  const [loading, setLoading] = React.useState("false");
-
-  React.useEffect(() => {
-    async function fetchBookList() {
-      try {
-        setLoading("true");
-        const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${searchBook}`
-        );
-
-        const json = await response.json();
-        // console.log(json);
-        setResult(
-          json.items.map(item => {
-            console.log(item.volumeInfo.title);
-            return item.volumeInfo.title;
-          })
-        );
-      } catch (error) {
-        setLoading("null");
-      }
-    }
-
-    if (searchBook !== "") {
-      fetchBookList();
-    }
-  }, [searchBook]);
-
-  return [result, loading];
-}
-
-
-
-
-
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -116,6 +76,45 @@ const Kusapi = ({ location, history }) => {
                 </ErrorMessage>
               )}
               {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+              <Form.Group controlId="name">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="email">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="confirmPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>{" "}
+              {picMessage && (
+                <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+              )}
               <Form.Group controlId="pic">
                 <Form.Label>Change Profile Picture</Form.Label>
                 <Form.File
