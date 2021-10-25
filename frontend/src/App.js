@@ -9,6 +9,8 @@ import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
 import CreateNote from "./screens/SingleNote/CreateNote";
 import { useState } from "react";
+//dc-
+import MonitorScreen from "./screens/MonitorScreen/MonitorScreen";
 import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 import ChartsScreen from "./screens/ChartsScreen/ChartsScreen";
 import MyScript from "./screens/MyScript/MyScript";
@@ -32,6 +34,7 @@ function App() {
         />
         <Route path="/note/:id" component={SingleNote} />
         <Route path="/createnote" component={CreateNote} />
+        <Route path="/monitor" component={MonitorScreen} />
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/charts" component={ChartsScreen} />
         <Route path="/myscript" component={MyScript} />

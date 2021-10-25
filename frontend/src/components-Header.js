@@ -26,12 +26,9 @@ function Header({ setSearch }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Container>
-        {/*<Navbar.Brand href="/">Note(monitor)</Navbar.Brand>*/}
-        {/*<Navbar.Toggle aria-controls="responsive-navbar-nav" />*/}
+        <Navbar.Brand href="/">Note(monitor)</Navbar.Brand>
 
-        <Navbar.Brand href="/">mynotes</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="m-auto">
             {userInfo && (
@@ -53,18 +50,7 @@ function Header({ setSearch }) {
                   title={`${userInfo.name}`}
                   id="collasible-nav-dropdown"
                 >
-                  <NavDropdown.Item href="/monitor">
-                    {/* <img
-                      alt=""
-                      src={`${userInfo.pic}`}
-                      width="25"
-                      height="25"
-                      style={{ marginRight: 10 }}
-                    /> */}
-                    Monitor
-                  </NavDropdown.Item>
-
-                   <NavDropdown.Item href="/profile">
+                  <NavDropdown.Item href="/profile">
                     {/* <img
                       alt=""
                       src={`${userInfo.pic}`}

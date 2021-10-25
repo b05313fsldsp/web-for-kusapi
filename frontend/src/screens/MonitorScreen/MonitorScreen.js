@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
-import "./Kusapi.css";
+import "./MonitorScreen.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../../actions/userActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
-const Kusapi = ({ location, history }) => {
+const MonitorScreen = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pic, setPic] = useState();
@@ -145,4 +145,4 @@ const Kusapi = ({ location, history }) => {
   );
 };
 
-export default Kusapi;
+export default MonitorScreen;

@@ -56,7 +56,7 @@ function MyNotes({ history, search }) {
   };
 
   return (
-    <MainScreen title={`Welcome Back ${userInfo && userInfo.name}..`}>
+    <MainScreen title={`Welcome Back ${userInfo && userInfo.name}`}>
       {console.log(notes)}
       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
