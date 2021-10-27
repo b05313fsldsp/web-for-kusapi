@@ -6,141 +6,161 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../../actions/userActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
+import { Line } from "react-chartjs-2";
+import numeral from "numeral";
+
+const options = {
+  legend: {
+    display: false,
+  },
+  elements: {
+    point: {
+      radius: 0,
+    },
+  },
+  maintainAspectRatio: false,
+  tooltips: {
+    mode: "index",
+    intersect: false,
+    callbacks: {
+      label: function (tooltipItem, data) {
+        return numeral(tooltipItem.value).format("+0,0");
+      },
+    },
+  },
+  scales: {
+    xAxes: [
+      {
+        type: "time",
+        time: {
+          format: "hh:mm:ss", // "HH:mm",
+          tooltipFormat: "ll",
+        },
+      },
+    ],
+    yAxes: [
+      {
+        gridLines: {
+          display: true,
+        },
+
+      },
+    ],
+  },
+};
+
+
+
+const buildChartData = (data) => {
+  let chartData = [];
+
+  for (let tqs in data) {
+
+     var newDataPoint = {
+        x: data[tqs].tqstimestamps, // time : 4,
+        y: data[tqs].tanklevel, // concentration, //+ Math.random(10), // temp2, concentration, SPN1761 : 3,
+        y2: data[tqs].concentration, // concentration, //+ Math.random(10), // temp2, concentration, SPN1761 : 3,
+      };
+      chartData.push(newDataPoint);
+    }
+
+  return chartData;
+};
+
+const buildChartData2 = (data) => {
+  let chartData = [];
+
+  for (let tqs in data) {
+
+     var newDataPoint = {
+        x: data[tqs].tqstimestamps, // time : 4,
+        y: data[tqs].concentration, // concentration, //+ Math.random(10), // temp2, concentration, SPN1761 : 3,
+      };
+      chartData.push(newDataPoint);
+    }
+
+  return chartData;
+};
 
 const MonitorScreen = ({ location, history }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pic, setPic] = useState();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [picMessage, setPicMessage] = useState();
+  var chartData = [];
 
-  const dispatch = useDispatch();
+  const [data, setData] = useState({});
+  const [data2, setData2] = useState({});
+  const api_url = 'http://10.3.1.93:8081/monitor/tqs';
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
-  const userUpdate = useSelector((state) => state.userUpdate);
-  const { loading, error, success } = userUpdate;
+  /* 
+    const headers = { 'Content-Type': 'application/json' }  //dc- SN : xxxxxxx
+    fetch('https://api.npms.io/v2/search?q=react', { headers })
+        .then(response => response.json())
+        .then(data => this.setState({ totalReactPackages: data.total }));
+
+  */
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/");
-    } else {
-      setName(userInfo.name);
-      setEmail(userInfo.email);
-      setPic(userInfo.pic);
-    }
-  }, [history, userInfo]);
 
-  const postDetails = (pics) => {
-    setPicMessage(null);
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      const data = new FormData();
-      data.append("file", pics);
-      data.append("upload_preset", "notezipper");
-      data.append("cloud_name", "piyushproj");
-      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setPic(data.url.toString());
-          console.log(pic);
+    const headers = { 'sn': 'XXXXXXXXXXXX' }  //dc- SN : XXXXXXXXXXXX
+    const fetchData = async () => {
+      // await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+      await fetch(api_url, { headers })
+        .then((response) => {
+          return response.json();
         })
-        .catch((err) => {
-          console.log(err);
+        .then((data) => {
+          var chartData = buildChartData(data);
+          setData(chartData);
+          //var chartData2 = buildChartData2(data2);
+          //setData(chartData2);
+          //dc-
+          // console.log(chartData);
         });
-    } else {
-      return setPicMessage("Please Select an Image");
-    }
-  };
+    };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+    fetchData();
+    //dc-
+    setInterval(fetchData, 1000);
 
-    dispatch(updateProfile({ name, email, password, pic }));
-  };
+
+
+  }, []);
+
 
   return (
-    <MainScreen title="EDIT PROFILE">
-      <div>
-        <Row className="profileContainer">
-          <Col md={6}>
-            <Form onSubmit={submitHandler}>
-              {loading && <Loading />}
-              {success && (
-                <ErrorMessage variant="success">
-                  Updated Successfully
-                </ErrorMessage>
-              )}
-              {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-              <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="email">
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Enter Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="confirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>{" "}
-              {picMessage && (
-                <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
-              )}
-              <Form.Group controlId="pic">
-                <Form.Label>Change Profile Picture</Form.Label>
-                <Form.File
-                  onChange={(e) => postDetails(e.target.files[0])}
-                  id="custom-file"
-                  type="image/png"
-                  label="Upload Profile Picture"
-                  custom
-                />
-              </Form.Group>
-              <Button type="submit" varient="primary">
-                Update
-              </Button>
-            </Form>
-          </Col>
-          <Col
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <img src={pic} alt={name} className="profilePic" />
-          </Col>
-        </Row>
-      </div>
+    <MainScreen title="TQS Dynamic Monitor">
+    <div>
+      {data?.length > 0 && (
+        <Line
+          data={{
+            datasets: [
+              {
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                borderColor: "#000001",
+                data: data,
+              },
+            ],
+          }}
+          options={options}
+        />
+      )}
+    </div>
+    <div>
+      {data?.length > 0 && (
+        <Line
+          data={{
+            datasets: [
+              {
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                borderColor: "#000001",
+                data: data,
+              },
+            ],
+          }}
+          options={options}
+        />
+      )}
+    </div>
+
     </MainScreen>
   );
 };

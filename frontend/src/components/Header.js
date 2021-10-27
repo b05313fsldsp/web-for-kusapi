@@ -64,6 +64,17 @@ function Header({ setSearch }) {
                     Monitor
                   </NavDropdown.Item>
 
+                  <NavDropdown.Item href="/map">
+                    {/* <img
+                      alt=""
+                      src={`${userInfo.pic}`}
+                      width="25"
+                      height="25"
+                      style={{ marginRight: 10 }}
+                    /> */}
+                    Map
+                  </NavDropdown.Item>
+
                    <NavDropdown.Item href="/profile">
                     {/* <img
                       alt=""

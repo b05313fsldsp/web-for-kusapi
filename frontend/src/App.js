@@ -11,6 +11,7 @@ import CreateNote from "./screens/SingleNote/CreateNote";
 import { useState } from "react";
 //dc-
 import MonitorScreen from "./screens/MonitorScreen/MonitorScreen";
+import MapScreen from "./screens/MapScreen/MapScreen";
 import ProfileScreen from "./screens/ProfileScreen/ProfileScreen";
 import ChartsScreen from "./screens/ChartsScreen/ChartsScreen";
 import MyScript from "./screens/MyScript/MyScript";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/note/:id" component={SingleNote} />
         <Route path="/createnote" component={CreateNote} />
         <Route path="/monitor" component={MonitorScreen} />
+        <Route path="/map" component={MapScreen} />
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/charts" component={ChartsScreen} />
         <Route path="/myscript" component={MyScript} />
